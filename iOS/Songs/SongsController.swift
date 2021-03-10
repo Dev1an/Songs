@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SongsController: CollectionController<SongsController> {
+class SongsController<Registry: SongRegistry>: CollectionController<SongsController> {
 	let searchController = UISearchController(searchResultsController: nil)
 
 	override func configureCollection() {

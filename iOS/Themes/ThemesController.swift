@@ -7,18 +7,13 @@
 
 import UIKit
 
-class ThemeController: CollectionController<ThemeController> {
+class ThemeController<Registry: SongRegistry>: CollectionController<ThemeController>, UICollectionViewDelegate {
+
 	override func configureCollection() {
 		collection.view.delegate = self
-	}
-
-	override func viewDidLoad() {
-		super.viewDidLoad()
 		navigationItem.title = "Themes"
 	}
-}
 
-extension ThemeController: UICollectionViewDelegate {
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		print(indexPath)
 	}

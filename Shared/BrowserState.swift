@@ -16,13 +16,20 @@ protocol NavigatbleSong {
 	var originalVersion: ID? {get}
 }
 
-protocol NavigatableTheme {
+protocol NavigatableTheme: Hashable {
 	associatedtype Language: Hashable
 	associatedtype ID: Hashable
 
 	var id: ID {get}
+	var title: String {get}
 	var parent: ID? {get}
 	var language: Language {get}
+}
+
+extension NavigatableTheme {
+	func hash(into hasher: inout Hasher) {
+		hasher.combine(id)
+	}
 }
 
 protocol SongRegistry {
@@ -61,8 +68,8 @@ class BrowserState<Registry: SongRegistry>: ObservableObject {
 	let registry: Registry
 
 	@Published var themeLanguage: Registry.Language
-	@Published var themes = [Registry.Theme]()
-	@Published var songs = [Registry.Song]()
+	@Published var themes: [Registry.Theme]
+	@Published var songs: [Registry.Song]
 
 	@Published var selectedThemes = Set<Registry.Theme.ID>()
 	@Published var selectedSongs = Set<Registry.Song.ID>()
@@ -75,6 +82,8 @@ class BrowserState<Registry: SongRegistry>: ObservableObject {
 		registry = songs
 		songState = SongState(registry: registry)
 		themeLanguage = language
+		themes = registry.rootThemes(in: language)
+		self.songs = []
 	}
 
 }

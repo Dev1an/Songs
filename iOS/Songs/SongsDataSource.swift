@@ -15,8 +15,8 @@ extension SongsController: CollectionPropertiesProvider {
 		return layout
 	}
 
-	static func createDataSource(for view: UICollectionView) -> UICollectionViewDiffableDataSource<MemoryDataBase.Theme.ID, MemoryDataBase.Theme> {
-		ThemeController.createDataSource(for: view)
+	static func createDataSource(for view: UICollectionView, with context: BrowserState<Registry>) -> UICollectionViewDiffableDataSource<ThemeController<Registry>.Section, Registry.Theme> {
+		ThemeController<Registry>.createDataSource(for: view, with: context)
 	}
 }
 

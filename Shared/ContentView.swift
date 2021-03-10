@@ -8,12 +8,17 @@
 import SwiftUI
 
 struct ContentView: View {
+	@StateObject var stateManager = BrowserState(songs: sampleData, language: .Dutch)
+
     var body: some View {
 //		NavigationView {
 //			themes
 //		}
 		
-		ThreeColumnView(secondaryContent: Text("This is me")).ignoresSafeArea()
+		ThreeColumnView(
+			stateManager: stateManager,
+			secondaryContent: Text("This is me")
+		).ignoresSafeArea()
     }
 	
 	var themes: some View {

@@ -8,17 +8,29 @@
 import UIKit
 
 class CollectionController<Provider: CollectionPropertiesProvider>: UIViewController {
-	struct CollectionProperties<Section: Hashable, Item: Hashable> {
-		let view: UICollectionView
-		let data: UICollectionViewDiffableDataSource<Section, Item>
 
-		init<P: CollectionPropertiesProvider>(provider: P.Type) where P.Section == Section, P.Item == Item {
-			view = UICollectionView(frame: .zero, collectionViewLayout: provider.createLayout())
-			data = provider.createDataSource(for: view)
+	struct CollectionProperties {
+		let view: UICollectionView
+		let data: UICollectionViewDiffableDataSource<Provider.Section, Provider.Item>
+
+		init(with context: Provider.Context) {
+			view = UICollectionView(frame: .zero, collectionViewLayout: Provider.createLayout())
+			data = Provider.createDataSource(for: view, with: context)
 		}
 	}
 
-	let collection = CollectionProperties(provider: Provider.self)
+	let context: Provider.Context
+	let collection: CollectionProperties
+
+	init(context: Provider.Context) {
+		self.context = context
+		collection = CollectionProperties(with: context)
+		super.init(nibName: nil, bundle: nil)
+	}
+
+	required init?(coder: NSCoder) {
+		fatalError("init(coder:) has is not supported")
+	}
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -32,9 +44,10 @@ class CollectionController<Provider: CollectionPropertiesProvider>: UIViewContro
 }
 
 protocol CollectionPropertiesProvider {
+	associatedtype Context
 	associatedtype Section: Hashable
 	associatedtype Item: Hashable
 
 	static func createLayout() -> UICollectionViewLayout
-	static func createDataSource(for view: UICollectionView) -> UICollectionViewDiffableDataSource<Section, Item>
+	static func createDataSource(for view: UICollectionView, with context: Context) -> UICollectionViewDiffableDataSource<Section, Item>
 }

@@ -7,12 +7,14 @@
 
 import SwiftUI
 
-final class ThreeColumnView<C: View>: UIViewControllerRepresentable {
+final class ThreeColumnView<C: View, Registry: SongRegistry>: UIViewControllerRepresentable {
+	let stateManager: BrowserState<Registry>
 	let primaryController, supplementaryController, secondaryController: UINavigationController
-	let themeController = ThemeController()
-	let songsController = SongsController()
-	
-	init(secondaryContent: C) {
+
+	init(stateManager: BrowserState<Registry>, secondaryContent: C) {
+		self.stateManager = stateManager
+		let themeController = ThemeController(context: stateManager)
+		let songsController = SongsController(context: stateManager)
 		primaryController = UINavigationController(rootViewController: themeController)
 		secondaryController = host(secondaryContent)
 		supplementaryController = UINavigationController(rootViewController: songsController)
@@ -44,6 +46,6 @@ func host<V: View>(_ view: V, title: String? = nil, configurator: (UIHostingCont
 
 struct ThreeColumnView_Previews: PreviewProvider {
 	static var previews: some View {
-		ThreeColumnView(secondaryContent: Text("This is me"))
+		ThreeColumnView(stateManager: BrowserState(songs: sampleData, language: .Dutch), secondaryContent: Text("This is me"))
 	}
 }
