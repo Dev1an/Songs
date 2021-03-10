@@ -3,38 +3,48 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		742D644225F7DD05001A9E05 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D644125F7DD05001A9E05 /* Tests_iOS.swift */; };
-		742D644D25F7DD05001A9E05 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D644C25F7DD05001A9E05 /* Tests_macOS.swift */; };
+		74146D2825F7F81B00AFA881 /* ThreeColumnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74146D2725F7F81B00AFA881 /* ThreeColumnView.swift */; };
+		742024D325F825F90067814D /* ThemesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742024D225F825F90067814D /* ThemesController.swift */; };
+		742024E925F8C8780067814D /* ThemesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742024E825F8C8780067814D /* ThemesDataSource.swift */; };
+		742024F125F8D8990067814D /* CollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742024F025F8D8990067814D /* CollectionController.swift */; };
+		742024F625F8D9AE0067814D /* SongsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742024F525F8D9AE0067814D /* SongsController.swift */; };
+		7420250B25F8DBFD0067814D /* SongsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7420250A25F8DBFD0067814D /* SongsDataSource.swift */; };
 		742D644F25F7DD05001A9E05 /* SongsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D642625F7DD02001A9E05 /* SongsApp.swift */; };
 		742D645025F7DD05001A9E05 /* SongsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D642625F7DD02001A9E05 /* SongsApp.swift */; };
 		742D645125F7DD05001A9E05 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D642725F7DD02001A9E05 /* ContentView.swift */; };
 		742D645225F7DD05001A9E05 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D642725F7DD02001A9E05 /* ContentView.swift */; };
 		742D645325F7DD05001A9E05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 742D642825F7DD05001A9E05 /* Assets.xcassets */; };
 		742D645425F7DD05001A9E05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 742D642825F7DD05001A9E05 /* Assets.xcassets */; };
+		742D646925F7DD4A001A9E05 /* BrowserState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D646725F7DD4A001A9E05 /* BrowserState.swift */; };
+		742D646A25F7DD4A001A9E05 /* BrowserState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D646725F7DD4A001A9E05 /* BrowserState.swift */; };
+		742D646B25F7DD4A001A9E05 /* MemoryDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D646825F7DD4A001A9E05 /* MemoryDB.swift */; };
+		742D646C25F7DD4A001A9E05 /* MemoryDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D646825F7DD4A001A9E05 /* MemoryDB.swift */; };
+		742D647325F7DD6E001A9E05 /* Tagged in Frameworks */ = {isa = PBXBuildFile; productRef = 742D647225F7DD6E001A9E05 /* Tagged */; };
+		742D647A25F7DD87001A9E05 /* Tagged in Frameworks */ = {isa = PBXBuildFile; productRef = 742D647925F7DD87001A9E05 /* Tagged */; };
+		742D64A525F7DF5B001A9E05 /* SongsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742D64A425F7DF5B001A9E05 /* SongsTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		742D643E25F7DD05001A9E05 /* PBXContainerItemProxy */ = {
+		742D64A725F7DF5B001A9E05 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 742D642125F7DD02001A9E05 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 742D642C25F7DD05001A9E05;
 			remoteInfo = "Songs (iOS)";
 		};
-		742D644925F7DD05001A9E05 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 742D642125F7DD02001A9E05 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 742D643425F7DD05001A9E05;
-			remoteInfo = "Songs (macOS)";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		74146D2725F7F81B00AFA881 /* ThreeColumnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeColumnView.swift; sourceTree = "<group>"; };
+		742024D225F825F90067814D /* ThemesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesController.swift; sourceTree = "<group>"; };
+		742024E825F8C8780067814D /* ThemesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesDataSource.swift; sourceTree = "<group>"; };
+		742024F025F8D8990067814D /* CollectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionController.swift; sourceTree = "<group>"; };
+		742024F525F8D9AE0067814D /* SongsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongsController.swift; sourceTree = "<group>"; };
+		7420250A25F8DBFD0067814D /* SongsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongsDataSource.swift; sourceTree = "<group>"; };
 		742D642625F7DD02001A9E05 /* SongsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongsApp.swift; sourceTree = "<group>"; };
 		742D642725F7DD02001A9E05 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		742D642825F7DD05001A9E05 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -43,12 +53,11 @@
 		742D643525F7DD05001A9E05 /* Songs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Songs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		742D643725F7DD05001A9E05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		742D643825F7DD05001A9E05 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
-		742D643D25F7DD05001A9E05 /* Tests iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		742D644125F7DD05001A9E05 /* Tests_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_iOS.swift; sourceTree = "<group>"; };
-		742D644325F7DD05001A9E05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		742D644825F7DD05001A9E05 /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		742D644C25F7DD05001A9E05 /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
-		742D644E25F7DD05001A9E05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		742D646725F7DD4A001A9E05 /* BrowserState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowserState.swift; sourceTree = "<group>"; };
+		742D646825F7DD4A001A9E05 /* MemoryDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryDB.swift; sourceTree = "<group>"; };
+		742D64A225F7DF5B001A9E05 /* SongsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SongsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		742D64A425F7DF5B001A9E05 /* SongsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongsTests.swift; sourceTree = "<group>"; };
+		742D64A625F7DF5B001A9E05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				742D647325F7DD6E001A9E05 /* Tagged in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,17 +73,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				742D647A25F7DD87001A9E05 /* Tagged in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		742D643A25F7DD05001A9E05 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		742D644525F7DD05001A9E05 /* Frameworks */ = {
+		742D649F25F7DF5B001A9E05 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -83,15 +87,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		742024E425F8C84D0067814D /* Themes */ = {
+			isa = PBXGroup;
+			children = (
+				742024D225F825F90067814D /* ThemesController.swift */,
+				742024E825F8C8780067814D /* ThemesDataSource.swift */,
+			);
+			path = Themes;
+			sourceTree = "<group>";
+		};
+		742024FD25F8DBA60067814D /* Songs */ = {
+			isa = PBXGroup;
+			children = (
+				742024F525F8D9AE0067814D /* SongsController.swift */,
+				7420250A25F8DBFD0067814D /* SongsDataSource.swift */,
+			);
+			path = Songs;
+			sourceTree = "<group>";
+		};
 		742D642025F7DD02001A9E05 = {
 			isa = PBXGroup;
 			children = (
 				742D642525F7DD02001A9E05 /* Shared */,
 				742D642F25F7DD05001A9E05 /* iOS */,
 				742D643625F7DD05001A9E05 /* macOS */,
-				742D644025F7DD05001A9E05 /* Tests iOS */,
-				742D644B25F7DD05001A9E05 /* Tests macOS */,
+				742D64A325F7DF5B001A9E05 /* SongsTests */,
 				742D642E25F7DD05001A9E05 /* Products */,
+				742D647825F7DD87001A9E05 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -100,6 +122,8 @@
 			children = (
 				742D642625F7DD02001A9E05 /* SongsApp.swift */,
 				742D642725F7DD02001A9E05 /* ContentView.swift */,
+				742D646725F7DD4A001A9E05 /* BrowserState.swift */,
+				742D646825F7DD4A001A9E05 /* MemoryDB.swift */,
 				742D642825F7DD05001A9E05 /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -110,8 +134,7 @@
 			children = (
 				742D642D25F7DD05001A9E05 /* Songs.app */,
 				742D643525F7DD05001A9E05 /* Songs.app */,
-				742D643D25F7DD05001A9E05 /* Tests iOS.xctest */,
-				742D644825F7DD05001A9E05 /* Tests macOS.xctest */,
+				742D64A225F7DF5B001A9E05 /* SongsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -120,6 +143,10 @@
 			isa = PBXGroup;
 			children = (
 				742D643025F7DD05001A9E05 /* Info.plist */,
+				74146D2725F7F81B00AFA881 /* ThreeColumnView.swift */,
+				742024F025F8D8990067814D /* CollectionController.swift */,
+				742024E425F8C84D0067814D /* Themes */,
+				742024FD25F8DBA60067814D /* Songs */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -133,22 +160,20 @@
 			path = macOS;
 			sourceTree = "<group>";
 		};
-		742D644025F7DD05001A9E05 /* Tests iOS */ = {
+		742D647825F7DD87001A9E05 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				742D644125F7DD05001A9E05 /* Tests_iOS.swift */,
-				742D644325F7DD05001A9E05 /* Info.plist */,
 			);
-			path = "Tests iOS";
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		742D644B25F7DD05001A9E05 /* Tests macOS */ = {
+		742D64A325F7DF5B001A9E05 /* SongsTests */ = {
 			isa = PBXGroup;
 			children = (
-				742D644C25F7DD05001A9E05 /* Tests_macOS.swift */,
-				742D644E25F7DD05001A9E05 /* Info.plist */,
+				742D64A425F7DF5B001A9E05 /* SongsTests.swift */,
+				742D64A625F7DF5B001A9E05 /* Info.plist */,
 			);
-			path = "Tests macOS";
+			path = SongsTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,6 +192,9 @@
 			dependencies = (
 			);
 			name = "Songs (iOS)";
+			packageProductDependencies = (
+				742D647225F7DD6E001A9E05 /* Tagged */,
+			);
 			productName = "Songs (iOS)";
 			productReference = 742D642D25F7DD05001A9E05 /* Songs.app */;
 			productType = "com.apple.product-type.application";
@@ -184,45 +212,30 @@
 			dependencies = (
 			);
 			name = "Songs (macOS)";
+			packageProductDependencies = (
+				742D647925F7DD87001A9E05 /* Tagged */,
+			);
 			productName = "Songs (macOS)";
 			productReference = 742D643525F7DD05001A9E05 /* Songs.app */;
 			productType = "com.apple.product-type.application";
 		};
-		742D643C25F7DD05001A9E05 /* Tests iOS */ = {
+		742D64A125F7DF5B001A9E05 /* SongsTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 742D645D25F7DD05001A9E05 /* Build configuration list for PBXNativeTarget "Tests iOS" */;
+			buildConfigurationList = 742D64A925F7DF5B001A9E05 /* Build configuration list for PBXNativeTarget "SongsTests" */;
 			buildPhases = (
-				742D643925F7DD05001A9E05 /* Sources */,
-				742D643A25F7DD05001A9E05 /* Frameworks */,
-				742D643B25F7DD05001A9E05 /* Resources */,
+				742D649E25F7DF5B001A9E05 /* Sources */,
+				742D649F25F7DF5B001A9E05 /* Frameworks */,
+				742D64A025F7DF5B001A9E05 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				742D643F25F7DD05001A9E05 /* PBXTargetDependency */,
+				742D64A825F7DF5B001A9E05 /* PBXTargetDependency */,
 			);
-			name = "Tests iOS";
-			productName = "Tests iOS";
-			productReference = 742D643D25F7DD05001A9E05 /* Tests iOS.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
-		742D644725F7DD05001A9E05 /* Tests macOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 742D646025F7DD05001A9E05 /* Build configuration list for PBXNativeTarget "Tests macOS" */;
-			buildPhases = (
-				742D644425F7DD05001A9E05 /* Sources */,
-				742D644525F7DD05001A9E05 /* Frameworks */,
-				742D644625F7DD05001A9E05 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				742D644A25F7DD05001A9E05 /* PBXTargetDependency */,
-			);
-			name = "Tests macOS";
-			productName = "Tests macOS";
-			productReference = 742D644825F7DD05001A9E05 /* Tests macOS.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
+			name = SongsTests;
+			productName = SongsTests;
+			productReference = 742D64A225F7DF5B001A9E05 /* SongsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -239,13 +252,9 @@
 					742D643425F7DD05001A9E05 = {
 						CreatedOnToolsVersion = 12.4;
 					};
-					742D643C25F7DD05001A9E05 = {
+					742D64A125F7DF5B001A9E05 = {
 						CreatedOnToolsVersion = 12.4;
 						TestTargetID = 742D642C25F7DD05001A9E05;
-					};
-					742D644725F7DD05001A9E05 = {
-						CreatedOnToolsVersion = 12.4;
-						TestTargetID = 742D643425F7DD05001A9E05;
 					};
 				};
 			};
@@ -258,14 +267,16 @@
 				Base,
 			);
 			mainGroup = 742D642025F7DD02001A9E05;
+			packageReferences = (
+				742D647125F7DD6E001A9E05 /* XCRemoteSwiftPackageReference "swift-tagged" */,
+			);
 			productRefGroup = 742D642E25F7DD05001A9E05 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				742D642C25F7DD05001A9E05 /* Songs (iOS) */,
 				742D643425F7DD05001A9E05 /* Songs (macOS) */,
-				742D643C25F7DD05001A9E05 /* Tests iOS */,
-				742D644725F7DD05001A9E05 /* Tests macOS */,
+				742D64A125F7DF5B001A9E05 /* SongsTests */,
 			);
 		};
 /* End PBXProject section */
@@ -287,14 +298,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		742D643B25F7DD05001A9E05 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		742D644625F7DD05001A9E05 /* Resources */ = {
+		742D64A025F7DF5B001A9E05 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -308,8 +312,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				742D646B25F7DD4A001A9E05 /* MemoryDB.swift in Sources */,
+				7420250B25F8DBFD0067814D /* SongsDataSource.swift in Sources */,
+				742024D325F825F90067814D /* ThemesController.swift in Sources */,
 				742D645125F7DD05001A9E05 /* ContentView.swift in Sources */,
+				742D646925F7DD4A001A9E05 /* BrowserState.swift in Sources */,
 				742D644F25F7DD05001A9E05 /* SongsApp.swift in Sources */,
+				742024F125F8D8990067814D /* CollectionController.swift in Sources */,
+				742024F625F8D9AE0067814D /* SongsController.swift in Sources */,
+				742024E925F8C8780067814D /* ThemesDataSource.swift in Sources */,
+				74146D2825F7F81B00AFA881 /* ThreeColumnView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,39 +329,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				742D646C25F7DD4A001A9E05 /* MemoryDB.swift in Sources */,
 				742D645225F7DD05001A9E05 /* ContentView.swift in Sources */,
+				742D646A25F7DD4A001A9E05 /* BrowserState.swift in Sources */,
 				742D645025F7DD05001A9E05 /* SongsApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		742D643925F7DD05001A9E05 /* Sources */ = {
+		742D649E25F7DF5B001A9E05 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				742D644225F7DD05001A9E05 /* Tests_iOS.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		742D644425F7DD05001A9E05 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				742D644D25F7DD05001A9E05 /* Tests_macOS.swift in Sources */,
+				742D64A525F7DF5B001A9E05 /* SongsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		742D643F25F7DD05001A9E05 /* PBXTargetDependency */ = {
+		742D64A825F7DF5B001A9E05 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 742D642C25F7DD05001A9E05 /* Songs (iOS) */;
-			targetProxy = 742D643E25F7DD05001A9E05 /* PBXContainerItemProxy */;
-		};
-		742D644A25F7DD05001A9E05 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 742D643425F7DD05001A9E05 /* Songs (macOS) */;
-			targetProxy = 742D644925F7DD05001A9E05 /* PBXContainerItemProxy */;
+			targetProxy = 742D64A725F7DF5B001A9E05 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -558,92 +559,48 @@
 			};
 			name = Release;
 		};
-		742D645E25F7DD05001A9E05 /* Debug */ = {
+		742D64AA25F7DF5B001A9E05 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7TD9A665TC;
-				INFOPLIST_FILE = "Tests iOS/Info.plist";
+				INFOPLIST_FILE = SongsTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.devian.Tests-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.devian.SongsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Songs (iOS)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Songs.app/Songs";
 			};
 			name = Debug;
 		};
-		742D645F25F7DD05001A9E05 /* Release */ = {
+		742D64AB25F7DF5B001A9E05 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7TD9A665TC;
-				INFOPLIST_FILE = "Tests iOS/Info.plist";
+				INFOPLIST_FILE = SongsTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.devian.Tests-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.devian.SongsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Songs (iOS)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Songs.app/Songs";
 				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		742D646125F7DD05001A9E05 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 7TD9A665TC;
-				INFOPLIST_FILE = "Tests macOS/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.devian.Tests-macOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = "Songs (macOS)";
-			};
-			name = Debug;
-		};
-		742D646225F7DD05001A9E05 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 7TD9A665TC;
-				INFOPLIST_FILE = "Tests macOS/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.devian.Tests-macOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = "Songs (macOS)";
 			};
 			name = Release;
 		};
@@ -677,25 +634,40 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		742D645D25F7DD05001A9E05 /* Build configuration list for PBXNativeTarget "Tests iOS" */ = {
+		742D64A925F7DF5B001A9E05 /* Build configuration list for PBXNativeTarget "SongsTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				742D645E25F7DD05001A9E05 /* Debug */,
-				742D645F25F7DD05001A9E05 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		742D646025F7DD05001A9E05 /* Build configuration list for PBXNativeTarget "Tests macOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				742D646125F7DD05001A9E05 /* Debug */,
-				742D646225F7DD05001A9E05 /* Release */,
+				742D64AA25F7DF5B001A9E05 /* Debug */,
+				742D64AB25F7DF5B001A9E05 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		742D647125F7DD6E001A9E05 /* XCRemoteSwiftPackageReference "swift-tagged" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-tagged";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.5.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		742D647225F7DD6E001A9E05 /* Tagged */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 742D647125F7DD6E001A9E05 /* XCRemoteSwiftPackageReference "swift-tagged" */;
+			productName = Tagged;
+		};
+		742D647925F7DD87001A9E05 /* Tagged */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 742D647125F7DD6E001A9E05 /* XCRemoteSwiftPackageReference "swift-tagged" */;
+			productName = Tagged;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 742D642125F7DD02001A9E05 /* Project object */;
 }

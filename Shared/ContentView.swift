@@ -9,9 +9,19 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+//		NavigationView {
+//			themes
+//		}
+		
+		ThreeColumnView(secondaryContent: Text("This is me")).ignoresSafeArea()
     }
+	
+	var themes: some View {
+		List {
+			Button("Go hello") {}
+			Text("Something else")
+		}
+	}
 }
 
 struct ContentView_Previews: PreviewProvider {
