@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		74146D2825F7F81B00AFA881 /* ThreeColumnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74146D2725F7F81B00AFA881 /* ThreeColumnView.swift */; };
+		7419F62F25FAD157006C31F2 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7419F62E25FAD157006C31F2 /* Model.swift */; };
+		7419F63025FAD157006C31F2 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7419F62E25FAD157006C31F2 /* Model.swift */; };
+		7419F63925FAD21F006C31F2 /* SongTextState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7419F63825FAD21F006C31F2 /* SongTextState.swift */; };
+		7419F63A25FAD21F006C31F2 /* SongTextState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7419F63825FAD21F006C31F2 /* SongTextState.swift */; };
 		742024D325F825F90067814D /* ThemesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742024D225F825F90067814D /* ThemesController.swift */; };
 		742024E925F8C8780067814D /* ThemesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742024E825F8C8780067814D /* ThemesDataSource.swift */; };
 		742024F125F8D8990067814D /* CollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742024F025F8D8990067814D /* CollectionController.swift */; };
@@ -40,6 +44,8 @@
 
 /* Begin PBXFileReference section */
 		74146D2725F7F81B00AFA881 /* ThreeColumnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeColumnView.swift; sourceTree = "<group>"; };
+		7419F62E25FAD157006C31F2 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		7419F63825FAD21F006C31F2 /* SongTextState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongTextState.swift; sourceTree = "<group>"; };
 		742024D225F825F90067814D /* ThemesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesController.swift; sourceTree = "<group>"; };
 		742024E825F8C8780067814D /* ThemesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesDataSource.swift; sourceTree = "<group>"; };
 		742024F025F8D8990067814D /* CollectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionController.swift; sourceTree = "<group>"; };
@@ -87,6 +93,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7419F63425FAD1F8006C31F2 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				742D646725F7DD4A001A9E05 /* BrowserState.swift */,
+				7419F63825FAD21F006C31F2 /* SongTextState.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		742024E425F8C84D0067814D /* Themes */ = {
 			isa = PBXGroup;
 			children = (
@@ -122,7 +137,8 @@
 			children = (
 				742D642625F7DD02001A9E05 /* SongsApp.swift */,
 				742D642725F7DD02001A9E05 /* ContentView.swift */,
-				742D646725F7DD4A001A9E05 /* BrowserState.swift */,
+				7419F63425FAD1F8006C31F2 /* ViewModel */,
+				7419F62E25FAD157006C31F2 /* Model.swift */,
 				742D646825F7DD4A001A9E05 /* MemoryDB.swift */,
 				742D642825F7DD05001A9E05 /* Assets.xcassets */,
 			);
@@ -315,11 +331,13 @@
 				742D646B25F7DD4A001A9E05 /* MemoryDB.swift in Sources */,
 				7420250B25F8DBFD0067814D /* SongsDataSource.swift in Sources */,
 				742024D325F825F90067814D /* ThemesController.swift in Sources */,
+				7419F63925FAD21F006C31F2 /* SongTextState.swift in Sources */,
 				742D645125F7DD05001A9E05 /* ContentView.swift in Sources */,
 				742D646925F7DD4A001A9E05 /* BrowserState.swift in Sources */,
 				742D644F25F7DD05001A9E05 /* SongsApp.swift in Sources */,
 				742024F125F8D8990067814D /* CollectionController.swift in Sources */,
 				742024F625F8D9AE0067814D /* SongsController.swift in Sources */,
+				7419F62F25FAD157006C31F2 /* Model.swift in Sources */,
 				742024E925F8C8780067814D /* ThemesDataSource.swift in Sources */,
 				74146D2825F7F81B00AFA881 /* ThreeColumnView.swift in Sources */,
 			);
@@ -329,8 +347,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7419F63025FAD157006C31F2 /* Model.swift in Sources */,
 				742D646C25F7DD4A001A9E05 /* MemoryDB.swift in Sources */,
 				742D645225F7DD05001A9E05 /* ContentView.swift in Sources */,
+				7419F63A25FAD21F006C31F2 /* SongTextState.swift in Sources */,
 				742D646A25F7DD4A001A9E05 /* BrowserState.swift in Sources */,
 				742D645025F7DD05001A9E05 /* SongsApp.swift in Sources */,
 			);
