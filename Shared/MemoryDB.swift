@@ -12,7 +12,7 @@ class MemoryDataBase: SongRegistry {
 		case Dutch, English, French
 	}
 
-	struct Theme: NavigatableTheme {
+	struct Theme: ReferableTheme {
 		let title: String
 		let subtitle: String?
 
@@ -21,11 +21,12 @@ class MemoryDataBase: SongRegistry {
 	}
 
 	struct Song: ReferableSong {
+		typealias ID = Tagged<Song, Int>
 		let title: String
 
-		let id: Tagged<Song, Int>
+		let id: ID
 		let language: Language
-		let originalVersion: Tagged<Song, Int>?
+		let originalVersion: ID?
 	}
 
 	struct Theme🔗Songs {

@@ -7,16 +7,17 @@
 
 import SwiftUI
 
-protocol ReferableSong {
+protocol ReferableSong: Hashable {
 	associatedtype ID: Hashable
 	associatedtype Language: Hashable
 
 	var id: ID {get}
+	var title: String {get}
 	var language: Language {get}
 	var originalVersion: ID? {get}
 }
 
-protocol NavigatableTheme: Hashable {
+protocol ReferableTheme: Hashable {
 	associatedtype Language: Hashable
 	associatedtype ID: Hashable
 
@@ -25,16 +26,17 @@ protocol NavigatableTheme: Hashable {
 	var language: Language {get}
 }
 
-extension NavigatableTheme {
-	func hash(into hasher: inout Hasher) {
-		hasher.combine(id)
-	}
+extension ReferableTheme {
+	func hash(into hasher: inout Hasher) { hasher.combine(id) }
+}
+extension ReferableSong {
+	func hash(into hasher: inout Hasher) { hasher.combine(id) }
 }
 
 protocol SongRegistry {
 	associatedtype Language
 	associatedtype Song: ReferableSong where Song.Language == Language
-	associatedtype Theme: NavigatableTheme where Theme.Language == Language
+	associatedtype Theme: ReferableTheme where Theme.Language == Language
 
 	func searchSong(_ text: String) -> [Song.ID]
 
@@ -68,7 +70,7 @@ class BrowserState<Registry: SongRegistry>: ObservableObject {
 	@Published var themes: [[Registry.Theme]]
 	@Published var songs: [Registry.Song]
 
-	@Published var selectedThemes = Set<Registry.Theme.ID>()
+	@Published var selectedThemes: Set<Registry.Theme.ID>
 	@Published var selectedSongs = Set<Registry.Song.ID>()
 
 	@Published var searchTerm = ""
@@ -79,8 +81,15 @@ class BrowserState<Registry: SongRegistry>: ObservableObject {
 		registry = songs
 		songState = SongState(registry: registry)
 		themeLanguage = language
-		themes = registry.groupedThemes(in: language)
-		self.songs = []
+		let groupedThemes = registry.groupedThemes(in: language)
+		themes = groupedThemes
+		if let theme = groupedThemes.first?.first {
+			selectedThemes = [theme.id]
+			self.songs = songs.songs(in: theme.id)
+		} else {
+			self.songs = []
+			selectedThemes = []
+		}
 	}
 
 }
