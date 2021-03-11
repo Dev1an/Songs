@@ -84,6 +84,7 @@ class BrowserState<Registry: SongRegistry>: ObservableObject {
 		let groupedThemes = registry.groupedThemes(in: language)
 		themes = groupedThemes
 		if let theme = groupedThemes.first?.first {
+			print("initial selected theme", theme)
 			selectedThemes = [theme.id]
 			self.songs = songs.songs(in: theme.id)
 		} else {
