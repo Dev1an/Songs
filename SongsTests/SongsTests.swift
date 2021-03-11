@@ -19,17 +19,19 @@ class SongsTests: XCTestCase {
     }
 
     func testLanguageLookup() throws {
-		XCTAssertEqual(Set(data.translations(for: 2)), Set([0,2,3]))
-		XCTAssertEqual(Set(data.translations(for: 3)), Set([0,2,3]))
+		XCTAssertEqual(Set(sampleData.translations(for: 2)), Set([0,2,3]))
+		XCTAssertEqual(Set(sampleData.translations(for: 3)), Set([0,2,3]))
     }
 
 	func testSearchSong() {
-		XCTAssertEqual(data.searchSong("Wij begroeten"), [0])
-		XCTAssertEqual(data.searchSong("Queen"), [2])
+		XCTAssertEqual(sampleData.searchSong("Wij begroeten"), [0])
+		XCTAssertEqual(sampleData.searchSong("Queen"), [2])
+
+		print(sampleData.groupedThemes(in: .Dutch).map{ $0.map(\.title).joined(separator: ", ") }.joined(separator: "\n"))
 	}
 
 	func testSearchByTheme() {
-		XCTAssertEqual(Set(data.songs(in: 0).map(\.id)), ([0,4]))
+		XCTAssertEqual(Set(sampleData.songs(in: 0).map(\.id)), ([0,4]))
 	}
 
     func testPerformanceExample() throws {

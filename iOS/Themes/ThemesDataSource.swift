@@ -32,7 +32,7 @@ extension ThemeController: CollectionPropertiesProvider {
 
 		var initialData = NSDiffableDataSourceSnapshot<Section, Registry.Theme>()
 		initialData.appendSections([.main])
-		initialData.appendItems(context.themes)
+		initialData.appendItems(context.themes.flatMap{$0})
 
 		dataSource.apply(initialData, animatingDifferences: false)
 
