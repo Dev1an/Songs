@@ -11,10 +11,6 @@ struct ContentView: View {
 	@StateObject var stateManager = BrowserState(songs: sampleData, language: .Dutch)
 
     var body: some View {
-//		NavigationView {
-//			themes
-//		}
-		
 		ThreeColumnView(
 			stateManager: stateManager,
 			secondaryContent: Text("This is me")

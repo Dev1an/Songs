@@ -11,9 +11,9 @@ class BrowserState<Registry: SongRegistry>: ObservableObject {
 
 	let registry: Registry
 
-	@Published var themeLanguage: Registry.Language
-	@Published var themes: [[Registry.Theme]]
-	@Published var songs: [Registry.Song]
+	@Published private (set) var themeLanguage: Registry.Language
+	@Published private (set) var themes: [[Registry.Theme]]
+	@Published private (set) var songs: [Registry.Song]
 
 	@Published var selectedThemes: Set<Registry.Theme.ID>
 	@Published var selectedSongs = Set<Registry.Song.ID>()
@@ -37,4 +37,5 @@ class BrowserState<Registry: SongRegistry>: ObservableObject {
 		}
 	}
 
+	
 }

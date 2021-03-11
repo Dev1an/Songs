@@ -150,7 +150,7 @@ let sampleData = MemoryDataBase(
 	themes: [
 		.init(title: "Marialiedjes", subtitle: nil, id: 0, language: .Dutch),
 		.init(title: "Marian songs", subtitle: nil, id: 1, language: .English),
-		.init(title: "Divers", subtitle: nil, id: 2, language: .Dutch),
+		.init(title: "Divers", subtitle: "Donges", id: 2, language: .Dutch),
 		.init(title: "Divers", subtitle: "Dinges", id: 3, language: .Dutch),
 		.init(title: "Marie", subtitle: nil, id: 4, language: .French),
 	],

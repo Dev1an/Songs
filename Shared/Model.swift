@@ -21,6 +21,7 @@ protocol ReferableTheme: Hashable {
 
 	var id: ID {get}
 	var title: String {get}
+	var subtitle: String? {get}
 	var language: Language {get}
 }
 
