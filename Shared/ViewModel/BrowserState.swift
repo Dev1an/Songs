@@ -15,7 +15,15 @@ class BrowserState<Registry: SongRegistry>: ObservableObject {
 	@Published private (set) var themes: [[Registry.Theme]]
 	@Published private (set) var songs: [Registry.Song]
 
-	@Published var selectedThemes: Set<Registry.Theme.ID>
+	@Published var selectedThemes: Set<Registry.Theme.ID> {
+		willSet {
+			var newSongs = [Registry.Song]()
+			for theme in newValue {
+				newSongs.append(contentsOf: registry.songs(in: theme))
+			}
+			songs = newSongs
+		}
+	}
 	@Published var selectedSongs = Set<Registry.Song.ID>()
 
 	@Published var searchTerm = ""

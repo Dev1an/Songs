@@ -11,6 +11,7 @@ import Combine
 class ThemeController<Registry: SongRegistry>: CollectionController<ThemeController>, UICollectionViewDelegate {
 
 	var selectionObserver: AnyCancellable?
+	var delegate: ThemeControllerDelegate?
 
 	override func configureCollection() {
 		collection.view.delegate = self
@@ -37,6 +38,7 @@ class ThemeController<Registry: SongRegistry>: CollectionController<ThemeControl
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		if case .theme(let theme) = collection.data.itemIdentifier(for: indexPath) {
 			context.selectedThemes = [theme.id]
+			delegate?.navigateToTheme()
 		} else {
 			fatalError("Should not be able to select groups")
 		}
@@ -44,7 +46,7 @@ class ThemeController<Registry: SongRegistry>: CollectionController<ThemeControl
 
 	func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
 		if let item = collection.data.itemIdentifier(for: indexPath) {
-			if case .theme(_) = item {
+			if case .theme = item {
 				return true
 			} else {
 				var snapshot = collection.data.snapshot(for: .main)
@@ -58,4 +60,8 @@ class ThemeController<Registry: SongRegistry>: CollectionController<ThemeControl
 		}
 	}
 
+}
+
+protocol ThemeControllerDelegate {
+	func navigateToTheme()
 }

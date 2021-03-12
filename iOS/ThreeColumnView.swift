@@ -9,11 +9,13 @@ import SwiftUI
 
 final class ThreeColumnView<C: View, Registry: SongRegistry>: UIViewControllerRepresentable {
 	let stateManager: BrowserState<Registry>
+	let split = UISplitViewController(style: .tripleColumn)
 	let primaryController, supplementaryController, secondaryController: UINavigationController
+	let themeController: ThemeController<Registry>
 
 	init(stateManager: BrowserState<Registry>, secondaryContent: C) {
 		self.stateManager = stateManager
-		let themeController = ThemeController(context: stateManager)
+		themeController = ThemeController(context: stateManager)
 		let songsController = SongsController(context: stateManager)
 		primaryController = UINavigationController(rootViewController: themeController)
 		secondaryController = host(secondaryContent)
@@ -21,10 +23,10 @@ final class ThreeColumnView<C: View, Registry: SongRegistry>: UIViewControllerRe
 	}
 	
 	func makeUIViewController(context: Context) -> UISplitViewController {
-		let split = UISplitViewController(style: .tripleColumn)
 		split.setViewController(primaryController, for: .primary)
 		split.setViewController(secondaryController, for: .secondary)
 		split.setViewController(supplementaryController, for: .supplementary)
+		themeController.delegate = self
 		
 		primaryController.navigationBar.prefersLargeTitles = true
 		supplementaryController.navigationBar.prefersLargeTitles = true
@@ -34,6 +36,12 @@ final class ThreeColumnView<C: View, Registry: SongRegistry>: UIViewControllerRe
 	
 	func updateUIViewController(_ uiViewController: UISplitViewController, context: Context) {
 		
+	}
+}
+
+extension ThreeColumnView: ThemeControllerDelegate {
+	func navigateToTheme() {
+		split.show(.supplementary)
 	}
 }
 
