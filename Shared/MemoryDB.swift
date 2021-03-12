@@ -139,6 +139,7 @@ func group<Value, Group: RawRepresentable, Target>(_ values: [Value], grouping: 
 	return compact.map(\.value)
 }
 
+let dongesID = MemoryDataBase.Theme.ID(2)
 let sampleData = MemoryDataBase(
 	songs: [
 		.init(title: "Wij begroeten U", id: 0, language: .Dutch, originalVersion: 3),
@@ -150,7 +151,7 @@ let sampleData = MemoryDataBase(
 	themes: [
 		.init(title: "Marialiedjes", subtitle: nil, id: 0, language: .Dutch),
 		.init(title: "Marian songs", subtitle: nil, id: 1, language: .English),
-		.init(title: "Divers", subtitle: "Donges", id: 2, language: .Dutch),
+		.init(title: "Divers", subtitle: "Donges", id: dongesID, language: .Dutch),
 		.init(title: "Divers", subtitle: "Dinges", id: 3, language: .Dutch),
 		.init(title: "Marie", subtitle: nil, id: 4, language: .French),
 	],
