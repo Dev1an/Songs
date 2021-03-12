@@ -27,7 +27,7 @@ class SongsTests: XCTestCase {
 		XCTAssertEqual(sampleData.searchSong("Wij begroeten"), [0])
 		XCTAssertEqual(sampleData.searchSong("Queen"), [2])
 
-		print(sampleData.groupedThemes(in: .Dutch).map{ $0.map(\.title).joined(separator: ", ") }.joined(separator: "\n"))
+		print(sampleData.groupedThemes(in: .dutch).map{ $0.map(\.title).joined(separator: ", ") }.joined(separator: "\n"))
 	}
 
 	func testSearchByTheme() {

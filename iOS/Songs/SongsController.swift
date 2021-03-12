@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class SongsController<Registry: SongRegistry>: CollectionController<SongsController> {
+class SongsController<Registry: PresentableSongRegistry>: CollectionController<SongsController> {
 	let searchController = UISearchController(searchResultsController: nil)
 	var selectionObserver: AnyCancellable?
 	var contentObserver: AnyCancellable?

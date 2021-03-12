@@ -38,7 +38,7 @@ extension ThemeController: CollectionPropertiesProvider {
 			cell.contentConfiguration = content
 		}
 
-		let dataSource = UICollectionViewDiffableDataSource<Section, GroupedTheme>(collectionView: view) { (view: UICollectionView, index, theme) -> UICollectionViewCell? in
+		let dataSource = DataSource(collectionView: view) { (view: UICollectionView, index, theme) -> UICollectionViewCell? in
 
 			switch theme {
 			case .group(let title): return view.dequeueConfiguredReusableCell(using: groupCellRegistration, for: index, item: title)
@@ -46,12 +46,17 @@ extension ThemeController: CollectionPropertiesProvider {
 			}
 		}
 
+		update(dataSource: dataSource, with: context.themes)
+		return dataSource
+	}
+
+	static func update(dataSource: DataSource, with themes: [[Registry.Theme]], animatingDifferences: Bool = false) {
 		var initialData = NSDiffableDataSourceSnapshot<Section, GroupedTheme>()
 		initialData.appendSections([.main])
-		dataSource.apply(initialData, animatingDifferences: false)
+		dataSource.apply(initialData, animatingDifferences: animatingDifferences)
 
 		var initialSectionData = NSDiffableDataSourceSectionSnapshot<GroupedTheme>()
-		for themeGroup in context.themes {
+		for themeGroup in themes {
 			if themeGroup.count > 1 {
 				let root = GroupedTheme.group(themeGroup.first!.title)
 				initialSectionData.append([root])
@@ -60,8 +65,6 @@ extension ThemeController: CollectionPropertiesProvider {
 				initialSectionData.append(themeGroup.map{.theme($0)})
 			}
 		}
-		dataSource.apply(initialSectionData, to: .main, animatingDifferences: false)
-
-		return dataSource
+		dataSource.apply(initialSectionData, to: .main, animatingDifferences: animatingDifferences)
 	}
 }

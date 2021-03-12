@@ -10,7 +10,6 @@ protocol ReferableSong: Hashable {
 	associatedtype Language: Hashable
 
 	var id: ID {get}
-	var title: String {get}
 	var language: Language {get}
 	var originalVersion: ID? {get}
 }
@@ -20,8 +19,6 @@ protocol ReferableTheme: Hashable {
 	associatedtype ID: Hashable
 
 	var id: ID {get}
-	var title: String {get}
-	var subtitle: String? {get}
 	var language: Language {get}
 }
 
@@ -29,6 +26,8 @@ protocol SongRegistry {
 	associatedtype Language
 	associatedtype Song: ReferableSong where Song.Language == Language
 	associatedtype Theme: ReferableTheme where Theme.Language == Language
+
+	var languages: [Language] {get}
 
 	func searchSong(_ text: String) -> [Song.ID]
 

@@ -8,8 +8,8 @@
 import Tagged
 
 class MemoryDataBase: SongRegistry {
-	enum Language: UInt8 {
-		case Dutch, English, French
+	enum Language: String, CaseIterable {
+		case dutch = "nl", english = "en", french = "fr"
 	}
 
 	struct Theme: ReferableTheme {
@@ -36,16 +36,14 @@ class MemoryDataBase: SongRegistry {
 
 	// Raw Data
 	let songs: [Song]
-	let themes: [Theme]
-	let theme🔗songs: [Theme🔗Songs]
+	let themes: [Theme.ID: Theme]
 
 	// Indices
 	private let index: Index
 
 	init(songs: [Song] = [], themes: [Theme] = [], theme🔗songs: [Theme🔗Songs] = []) {
 		self.songs = songs
-		self.themes = themes
-		self.theme🔗songs = theme🔗songs
+		self.themes = Dictionary(uniqueKeysWithValues: themes.map{($0.id, $0)})
 		index = Index(songs: songs, themes: themes, theme🔗songs: theme🔗songs)
 	}
 
@@ -55,17 +53,17 @@ class MemoryDataBase: SongRegistry {
 
 	func groupedThemes(in language: Language) -> [[Theme]] {
 		var groups = [String: [Theme]]()
+		guard let themes = index.themesByLanguage[language]?.map({themes[$0]!}) else { return [] }
 		for theme in themes {
-			if theme.language == language {
-				if groups.keys.contains(theme.title) { groups[theme.title]!.append(theme) }
-				else { groups[theme.title] = [theme]}
-			}
+			if groups.keys.contains(theme.title) { groups[theme.title]!.append(theme) }
+			else { groups[theme.title] = [theme]}
 		}
 		return Array(groups.values)
 	}
 
 	func themeOf(song id: Song.ID) -> Theme {
-		themes[index.themesBySong[id.rawValue].rawValue]
+		// TODO typeCheck
+		themes[index.themesBySong[id.rawValue]]!
 	}
 
 	func songs(in theme: Theme.ID) -> [Song] {
@@ -78,19 +76,19 @@ class MemoryDataBase: SongRegistry {
 	}
 
 	subscript(song: Song.ID) -> Song? { songs[song.rawValue] }
-	subscript(theme: Theme.ID) -> Theme? { themes[theme.rawValue] }
+	subscript(theme: Theme.ID) -> Theme? { themes[theme] }
 }
 
 extension MemoryDataBase {
 	struct Index {
-		let themesByLanguage: [[Theme.ID]]
+		let themesByLanguage: [Language: [Theme.ID]]
 		let themesBySong: [Theme.ID]
 		let songsByTheme: [[Song.ID]]
 		let songsByOriginalSong: [Song.ID: [Song.ID]]
 
 		init(songs: [Song], themes: [Theme], theme🔗songs: [Theme🔗Songs]) {
 			songsByTheme = group(theme🔗songs, grouping: \.themeID, target: \.songID)
-			themesByLanguage =  group(themes, grouping: \.language, target: \.id)
+			themesByLanguage = group(themes, groupBy: \.language, target: \.id)
 			songsByOriginalSong = group(songs, grouping: \.originalVersion, key: \.id)
 			var tempThemesBySong = [Theme.ID](repeating: .zero, count: songs.count)
 			for (theme, songs) in songsByTheme.enumerated() {
@@ -101,6 +99,8 @@ extension MemoryDataBase {
 			themesBySong = tempThemesBySong
 		}
 	}
+
+	var languages: [Language] { Language.allCases }
 }
 
 extension MemoryDataBase.Theme: Hashable {
@@ -124,6 +124,17 @@ func group<Value, Key>(_ values: [Value], grouping: (KeyPath<Value, Key?>), key:
 	return groups
 }
 
+func group<Value, Group, Target>(_ values: [Value], groupBy grouping: KeyPath<Value, Group>, target: KeyPath<Value, Target>) -> [Group: [Target]] {
+	var groups = [Group : [Target]]()
+	for value in values {
+		let group = value[keyPath: grouping]
+		let target = value[keyPath: target]
+		if groups.keys.contains(group) { groups[group]!.append(target) }
+		else { groups[group] = [target] }
+	}
+	return groups
+}
+
 func group<Value, Group: RawRepresentable, Target>(_ values: [Value], grouping: (KeyPath<Value, Group>), target: KeyPath<Value,Target>) -> [[Target]] where Group.RawValue: FixedWidthInteger, Group: Hashable {
 	var groups = [Group : [Target]]()
 	for value in values {
@@ -142,18 +153,18 @@ func group<Value, Group: RawRepresentable, Target>(_ values: [Value], grouping: 
 let dongesID = MemoryDataBase.Theme.ID(2)
 let sampleData = MemoryDataBase(
 	songs: [
-		.init(title: "Wij begroeten U", id: 0, language: .Dutch, originalVersion: 3),
-		.init(title: "Nu ik sta voor uw aangezicht", id: 1, language: .Dutch, originalVersion: nil),
-		.init(title: "Hail Queen of Heaven", id: 2, language: .English, originalVersion: 3),
-		.init(title: "Couronné d'étoiles", id: 3, language: .French, originalVersion: nil),
-		.init(title: "Wees gegroet Maria", id: 4, language: .Dutch, originalVersion: nil),
+		.init(title: "Wij begroeten U", id: 0, language: .dutch, originalVersion: 3),
+		.init(title: "Nu ik sta voor uw aangezicht", id: 1, language: .dutch, originalVersion: nil),
+		.init(title: "Hail Queen of Heaven", id: 2, language: .english, originalVersion: 3),
+		.init(title: "Couronné d'étoiles", id: 3, language: .french, originalVersion: nil),
+		.init(title: "Wees gegroet Maria", id: 4, language: .dutch, originalVersion: nil),
 	],
 	themes: [
-		.init(title: "Marialiedjes", subtitle: nil, id: 0, language: .Dutch),
-		.init(title: "Marian songs", subtitle: nil, id: 1, language: .English),
-		.init(title: "Divers", subtitle: "Donges", id: dongesID, language: .Dutch),
-		.init(title: "Divers", subtitle: "Dinges", id: 3, language: .Dutch),
-		.init(title: "Marie", subtitle: nil, id: 4, language: .French),
+		.init(title: "Marialiedjes", subtitle: nil, id: 0, language: .dutch),
+		.init(title: "Marian songs", subtitle: nil, id: 1, language: .english),
+		.init(title: "Divers", subtitle: "Donges", id: dongesID, language: .dutch),
+		.init(title: "Divers", subtitle: "Dinges", id: 3, language: .dutch),
+		.init(title: "Marie", subtitle: nil, id: 4, language: .french),
 	],
 	theme🔗songs: [
 		.init(songID: 0, themeID: 0),

@@ -9,9 +9,11 @@ import UIKit
 
 class CollectionController<Provider: CollectionPropertiesProvider>: UIViewController {
 
+	typealias DataSource = UICollectionViewDiffableDataSource<Provider.Section, Provider.Item>
+
 	struct CollectionProperties {
 		let view: UICollectionView
-		let data: UICollectionViewDiffableDataSource<Provider.Section, Provider.Item>
+		let data: DataSource
 
 		init(with context: Provider.Context) {
 			view = UICollectionView(frame: .zero, collectionViewLayout: Provider.createLayout())

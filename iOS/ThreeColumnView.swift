@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-final class ThreeColumnView<C: View, Registry: SongRegistry>: UIViewControllerRepresentable {
+final class ThreeColumnView<C: View, Registry: PresentableSongRegistry>: UIViewControllerRepresentable {
 	let stateManager: BrowserState<Registry>
 	let split = UISplitViewController(style: .tripleColumn)
 	let primaryController, supplementaryController, secondaryController: UINavigationController
@@ -54,6 +54,6 @@ func host<V: View>(_ view: V, title: String? = nil, configurator: (UIHostingCont
 
 struct ThreeColumnView_Previews: PreviewProvider {
 	static var previews: some View {
-		ThreeColumnView(stateManager: BrowserState(songs: sampleData, language: .Dutch), secondaryContent: Text("This is me"))
+		ThreeColumnView(stateManager: BrowserState(songs: sampleData, language: .dutch), secondaryContent: Text("This is me"))
 	}
 }

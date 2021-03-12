@@ -8,14 +8,33 @@
 import UIKit
 import Combine
 
-class ThemeController<Registry: SongRegistry>: CollectionController<ThemeController>, UICollectionViewDelegate {
+class ThemeController<Registry: PresentableSongRegistry>: CollectionController<ThemeController>, UICollectionViewDelegate {
 
+	var languageObserver: AnyCancellable?
+	var themesObserver: AnyCancellable?
 	var selectionObserver: AnyCancellable?
 	var delegate: ThemeControllerDelegate?
 
 	override func configureCollection() {
 		collection.view.delegate = self
 		navigationItem.title = "Themes"
+
+		languageObserver = context.$selectedLanguage.combineLatest(context.$languages).sink{ [unowned self] (selection, languages) in
+			navigationItem.leftBarButtonItem = UIBarButtonItem(
+				title: "Languages",
+				menu: UIMenu(
+					children: languages.map { [weak controller = self] language in
+						UIAction(title: language.localised, state: language == selection ? .on : .off) { action in
+							controller?.context.selectedLanguage = language
+						}
+					}
+				)
+			)
+		}
+
+		themesObserver = context.$themes.sink { [unowned self] themes in
+			Self.update(dataSource: collection.data, with: themes)
+		}
 
 		selectionObserver = context.$selectedThemes.sink { [unowned self] selection in
 			for themeID in selection {
@@ -64,4 +83,9 @@ class ThemeController<Registry: SongRegistry>: CollectionController<ThemeControl
 
 protocol ThemeControllerDelegate {
 	func navigateToTheme()
+}
+
+
+extension PresentableLanguage {
+	var localised: String { Locale.current.localizedString(forLanguageCode: code) ?? code }
 }

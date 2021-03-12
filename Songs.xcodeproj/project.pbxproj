@@ -12,6 +12,10 @@
 		7419F63025FAD157006C31F2 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7419F62E25FAD157006C31F2 /* Model.swift */; };
 		7419F63925FAD21F006C31F2 /* SongTextState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7419F63825FAD21F006C31F2 /* SongTextState.swift */; };
 		7419F63A25FAD21F006C31F2 /* SongTextState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7419F63825FAD21F006C31F2 /* SongTextState.swift */; };
+		741FED7325FBC6C000619E77 /* LanguageMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741FED7225FBC6C000619E77 /* LanguageMenu.swift */; };
+		741FED7825FBFA0600619E77 /* ViewRequirements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741FED7725FBFA0600619E77 /* ViewRequirements.swift */; };
+		741FED8325FBFDE000619E77 /* MemoryDB+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741FED8225FBFDE000619E77 /* MemoryDB+View.swift */; };
+		741FED8725FBFDE700619E77 /* MemoryDB+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 741FED8225FBFDE000619E77 /* MemoryDB+View.swift */; };
 		742024D325F825F90067814D /* ThemesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742024D225F825F90067814D /* ThemesController.swift */; };
 		742024E925F8C8780067814D /* ThemesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742024E825F8C8780067814D /* ThemesDataSource.swift */; };
 		742024F125F8D8990067814D /* CollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742024F025F8D8990067814D /* CollectionController.swift */; };
@@ -46,6 +50,9 @@
 		74146D2725F7F81B00AFA881 /* ThreeColumnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeColumnView.swift; sourceTree = "<group>"; };
 		7419F62E25FAD157006C31F2 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		7419F63825FAD21F006C31F2 /* SongTextState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongTextState.swift; sourceTree = "<group>"; };
+		741FED7225FBC6C000619E77 /* LanguageMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageMenu.swift; sourceTree = "<group>"; };
+		741FED7725FBFA0600619E77 /* ViewRequirements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRequirements.swift; sourceTree = "<group>"; };
+		741FED8225FBFDE000619E77 /* MemoryDB+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MemoryDB+View.swift"; sourceTree = "<group>"; };
 		742024D225F825F90067814D /* ThemesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesController.swift; sourceTree = "<group>"; };
 		742024E825F8C8780067814D /* ThemesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesDataSource.swift; sourceTree = "<group>"; };
 		742024F025F8D8990067814D /* CollectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionController.swift; sourceTree = "<group>"; };
@@ -102,6 +109,16 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		741FED7125FBC6A800619E77 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				741FED7725FBFA0600619E77 /* ViewRequirements.swift */,
+				741FED8225FBFDE000619E77 /* MemoryDB+View.swift */,
+				741FED7225FBC6C000619E77 /* LanguageMenu.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		742024E425F8C84D0067814D /* Themes */ = {
 			isa = PBXGroup;
 			children = (
@@ -139,6 +156,7 @@
 				742D642725F7DD02001A9E05 /* ContentView.swift */,
 				7419F63425FAD1F8006C31F2 /* ViewModel */,
 				7419F62E25FAD157006C31F2 /* Model.swift */,
+				741FED7125FBC6A800619E77 /* View */,
 				742D646825F7DD4A001A9E05 /* MemoryDB.swift */,
 				742D642825F7DD05001A9E05 /* Assets.xcassets */,
 			);
@@ -328,11 +346,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				741FED7825FBFA0600619E77 /* ViewRequirements.swift in Sources */,
 				742D646B25F7DD4A001A9E05 /* MemoryDB.swift in Sources */,
 				7420250B25F8DBFD0067814D /* SongsDataSource.swift in Sources */,
 				742024D325F825F90067814D /* ThemesController.swift in Sources */,
+				741FED7325FBC6C000619E77 /* LanguageMenu.swift in Sources */,
 				7419F63925FAD21F006C31F2 /* SongTextState.swift in Sources */,
 				742D645125F7DD05001A9E05 /* ContentView.swift in Sources */,
+				741FED8325FBFDE000619E77 /* MemoryDB+View.swift in Sources */,
 				742D646925F7DD4A001A9E05 /* BrowserState.swift in Sources */,
 				742D644F25F7DD05001A9E05 /* SongsApp.swift in Sources */,
 				742024F125F8D8990067814D /* CollectionController.swift in Sources */,
@@ -351,6 +372,7 @@
 				742D646C25F7DD4A001A9E05 /* MemoryDB.swift in Sources */,
 				742D645225F7DD05001A9E05 /* ContentView.swift in Sources */,
 				7419F63A25FAD21F006C31F2 /* SongTextState.swift in Sources */,
+				741FED8725FBFDE700619E77 /* MemoryDB+View.swift in Sources */,
 				742D646A25F7DD4A001A9E05 /* BrowserState.swift in Sources */,
 				742D645025F7DD05001A9E05 /* SongsApp.swift in Sources */,
 			);

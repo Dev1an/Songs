@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-	@StateObject var stateManager = BrowserState(songs: sampleData, language: .Dutch)
+	@StateObject var stateManager = BrowserState(songs: sampleData, language: .dutch)
 
     var body: some View {
 		ThreeColumnView(
