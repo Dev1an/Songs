@@ -23,6 +23,8 @@ extension SongsController: CollectionPropertiesProvider {
 		let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Registry.Song> { cell, indexPath, item in
 			var content = cell.defaultContentConfiguration()
 			content.text = item.title
+			content.secondaryText = "song text"
+			cell.accessories = [.label(text: "01-43-NL")]
 			cell.contentConfiguration = content
 		}
 

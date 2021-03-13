@@ -91,28 +91,31 @@ class SongsController<Registry: PresentableSongRegistry>: CollectionController<S
 
 	func willPresentSearchController(_ searchController: UISearchController) {
 		let configuration = UICollectionLayoutListConfiguration(appearance: .plain)
-		collection.view.setCollectionViewLayout(UICollectionViewCompositionalLayout.list(using: configuration), animated: true)
-
-		forceSelectionRedraw()
-	}
-
-	// TODO: remove this bugfix
-	func forceSelectionRedraw() {
-		let selection = context.selectedSongs.compactMap{context.registry[$0]}
-		if !selection.isEmpty {
-			var snapshot = collection.data.snapshot()
-			snapshot.reloadItems(selection)
-			collection.data.apply(snapshot)
-			for path in selection.compactMap({collection.data.indexPath(for: $0)}) {
-				collection.view.selectItem(at: path, animated: false, scrollPosition: [])
-			}
-		} else {
-			print("selection was empty", context.selectedSongs, selection)
-		}
+		// TODO: Add animation
+		collection.view.setCollectionViewLayout(UICollectionViewCompositionalLayout.list(using: configuration), animated: false)
+		backgroundColorFix()
 	}
 
 	func willDismissSearchController(_ searchController: UISearchController) {
-		collection.view.setCollectionViewLayout(Self.createLayout(), animated: true)
-		forceSelectionRedraw()
+		// TODO: Add animation
+		collection.view.setCollectionViewLayout(Self.createLayout(), animated: false)
+		backgroundColorFix()
+	}
+
+	// TODO: remove this bugfix
+	func backgroundColorFix() {
+		if traitCollection.userInterfaceStyle != .dark {
+			let selection = context.selectedSongs.compactMap{context.registry[$0]}
+			if !selection.isEmpty {
+				var snapshot = collection.data.snapshot()
+				snapshot.reloadItems(selection)
+				collection.data.apply(snapshot)
+				for path in selection.compactMap({collection.data.indexPath(for: $0)}) {
+					collection.view.selectItem(at: path, animated: false, scrollPosition: [])
+				}
+			} else {
+				print("selection was empty", context.selectedSongs, selection)
+			}
+		}
 	}
 }
