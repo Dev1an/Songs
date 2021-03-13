@@ -17,6 +17,7 @@ class CollectionController<Provider: CollectionPropertiesProvider>: UIViewContro
 
 		init(with context: Provider.Context) {
 			view = UICollectionView(frame: .zero, collectionViewLayout: Provider.createLayout())
+			view.backgroundColor = .white
 			data = Provider.createDataSource(for: view, with: context)
 		}
 	}

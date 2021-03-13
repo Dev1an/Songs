@@ -8,7 +8,8 @@
 import UIKit
 import Combine
 
-class SongsController<Registry: PresentableSongRegistry>: CollectionController<SongsController> {
+class SongsController<Registry: PresentableSongRegistry>: CollectionController<SongsController>, UISearchResultsUpdating, UISearchControllerDelegate {
+
 	let searchController = UISearchController(searchResultsController: nil)
 	var selectionObserver: AnyCancellable?
 	var contentObserver: AnyCancellable?
@@ -16,6 +17,9 @@ class SongsController<Registry: PresentableSongRegistry>: CollectionController<S
 
 	override func configureCollection() {
 		searchController.obscuresBackgroundDuringPresentation = false
+		searchController.searchResultsUpdater = self
+		searchController.delegate = self
+		searchController.view.layer.zPosition = collection.view.layer.zPosition + 1
 		navigationItem.searchController = searchController
 		navigationItem.title = "Songs"
 
@@ -44,5 +48,18 @@ class SongsController<Registry: PresentableSongRegistry>: CollectionController<S
 
 			collection.data.apply(newData, animatingDifferences: lessThan70Changes)
 		}
+	}
+
+	func updateSearchResults(for searchController: UISearchController) {
+		print("search")
+	}
+
+	func willPresentSearchController(_ searchController: UISearchController) {
+		let configuration = UICollectionLayoutListConfiguration(appearance: .plain)
+		collection.view.setCollectionViewLayout(UICollectionViewCompositionalLayout.list(using: configuration), animated: true)
+	}
+
+	func willDismissSearchController(_ searchController: UISearchController) {
+		collection.view.setCollectionViewLayout(Self.createLayout(), animated: true)
 	}
 }
