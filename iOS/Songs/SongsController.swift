@@ -92,7 +92,9 @@ class SongsController<Registry: PresentableSongRegistry>: CollectionController<S
 
 	func updateSearchResults(for searchController: UISearchController) {
 		if let searchTerm = searchController.searchBar.text {
-			context.searchTerm = searchTerm
+			if context.searchTerm != searchTerm {
+				context.searchTerm = searchTerm
+			}
 		}
 	}
 
@@ -134,13 +136,11 @@ class SongsController<Registry: PresentableSongRegistry>: CollectionController<S
 	func backgroundColorFix() {
 		if traitCollection.userInterfaceStyle != .dark {
 			let selection = context.selectedSongs.compactMap{context.registry[$0]}
-			if !selection.isEmpty {
-				var snapshot = collection.data.snapshot()
-				snapshot.reloadItems(selection)
-				collection.data.apply(snapshot)
-				for path in selection.compactMap({collection.data.indexPath(for: $0)}) {
-					collection.view.selectItem(at: path, animated: false, scrollPosition: [])
-				}
+			var snapshot = collection.data.snapshot()
+			snapshot.reloadItems(collection.view.indexPathsForVisibleItems.compactMap{collection.data.itemIdentifier(for: $0)})
+			collection.data.apply(snapshot)
+			for path in selection.compactMap({collection.data.indexPath(for: $0)}) {
+				collection.view.selectItem(at: path, animated: false, scrollPosition: [])
 			}
 		}
 	}

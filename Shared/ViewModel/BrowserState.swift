@@ -21,7 +21,7 @@ class BrowserState<Registry: SongRegistry>: ObservableObject {
 
 	@Published var searchTerm = "" { willSet {filterSongs(by: newValue)} }
 	@Published var isSearching = false { willSet {update(searchState: newValue)} }
-	@Published var searchScope = SearchScope<Registry.Theme.ID>.all { willSet {filterSongs(by: searchTerm)} }
+	@Published var searchScope = SearchScope<Registry.Theme.ID>.all { willSet {filterSongs(by: searchTerm, scope: newValue)} }
 
 	let songState: SongState<Registry>
 
@@ -61,17 +61,20 @@ class BrowserState<Registry: SongRegistry>: ObservableObject {
 		}
 	}
 
-	func filterSongs(by searchTerm: String) {
+	func filterSongs(by searchTerm: String, scope: SearchScope<Registry.Theme.ID>? = nil) {
+		let scope = scope ?? searchScope
 		if searchTerm.count > 2 {
-			songs = registry.searchSong(searchTerm, in: searchScope).compactMap{ registry[$0] }
+			songs = registry.searchSong(searchTerm, in: scope).compactMap{ registry[$0] }
 		} else {
-			songs = (searchScope == .all) ? registry.songs : registry.songs(in: selectedThemes)
+			songs = (scope == .all) ? registry.songs : registry.songs(in: selectedThemes)
 		}
 	}
 
 	func update(searchState: Bool) {
 		if searchState == false {
-			updateDependencies(for: selectedThemes)
+			songs = registry.songs(in: selectedThemes)
+		} else {
+			filterSongs(by: searchTerm)
 		}
 	}
 
