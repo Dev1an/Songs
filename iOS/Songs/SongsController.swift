@@ -122,11 +122,13 @@ class SongsController<Registry: PresentableSongRegistry>: CollectionController<S
 		}
 		searchScopes = themes.map(\.0)
 		if themes.isEmpty {
-			context.searchScope = .all
 			searchController.searchBar.scopeButtonTitles = nil
 		} else {
 			let allSongs = NSLocalizedString("All songs", comment: "Search scope to searhc in all the songs")
 			searchController.searchBar.scopeButtonTitles = [allSongs] + themes.map(\.1)
+		}
+		if context.isSearching {
+			searchBar(searchController.searchBar, selectedScopeButtonIndexDidChange: searchController.searchBar.selectedScopeButtonIndex)
 		}
 	}
 

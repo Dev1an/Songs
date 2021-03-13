@@ -19,9 +19,9 @@ class BrowserState<Registry: SongRegistry>: ObservableObject {
 	@Published var selectedThemes: Set<Registry.Theme.ID> { willSet {updateDependencies(for: newValue)} }
 	@Published var selectedSongs = Set<Registry.Song.ID>()
 
-	@Published var searchTerm = "" { willSet {filterSongs(by: newValue)} }
-	@Published var isSearching = false { willSet {update(searchState: newValue)} }
-	@Published var searchScope = SearchScope<Registry.Theme.ID>.all { willSet {filterSongs(by: searchTerm, scope: newValue)} }
+	@Published var searchTerm = "" { willSet {updateDependencies(for: newValue)} }
+	@Published var isSearching = false { willSet {updateDependencies(for: newValue)} }
+	@Published var searchScope = SearchScope<Registry.Theme.ID>.all { willSet {updateDependencies(for: searchTerm, scope: newValue)} }
 
 	let songState: SongState<Registry>
 
@@ -54,28 +54,33 @@ class BrowserState<Registry: SongRegistry>: ObservableObject {
 	}
 
 	private func updateDependencies(for selectedThemes: Set<Registry.Theme.ID>) {
-		if isSearching {
-			filterSongs(by: searchTerm)
-		} else {
-			songs = registry.songs(in: selectedThemes)
+		if isSearching == false {
+			showAllSongs(in: selectedThemes)
 		}
 	}
 
-	func filterSongs(by searchTerm: String, scope: SearchScope<Registry.Theme.ID>? = nil) {
+	func updateDependencies(for searchTerm: String, scope: SearchScope<Registry.Theme.ID>? = nil) {
 		let scope = scope ?? searchScope
 		if searchTerm.count > 2 {
 			songs = registry.searchSong(searchTerm, in: scope).compactMap{ registry[$0] }
 		} else {
-			songs = (scope == .all) ? registry.songs : registry.songs(in: selectedThemes)
+			switch scope {
+			case .all: songs = registry.songs
+			case .theme(let theme): showAllSongs(in: [theme])
+			}
 		}
 	}
 
-	func update(searchState: Bool) {
+	func updateDependencies(for searchState: Bool) {
 		if searchState == false {
-			songs = registry.songs(in: selectedThemes)
+			showAllSongs(in: selectedThemes)
 		} else {
-			filterSongs(by: searchTerm)
+			updateDependencies(for: searchTerm)
 		}
+	}
+
+	func showAllSongs(in themes: Set<Registry.Theme.ID>) {
+		songs = registry.songs(in: themes)
 	}
 
 	func selectedThemesAreContained(in groups: [[Registry.Theme]]) -> Bool {
