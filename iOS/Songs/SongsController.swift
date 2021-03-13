@@ -15,6 +15,10 @@ class SongsController<Registry: PresentableSongRegistry>: CollectionController<S
 	var contentObserver: AnyCancellable?
 	var themeObserver: AnyCancellable?
 
+	private (set) var searchScopes = [Registry.Theme.ID]()
+
+	// MARK: -
+
 	override func configureCollection() {
 		collection.view.delegate = self
 		setupSearchBar()
@@ -32,8 +36,9 @@ class SongsController<Registry: PresentableSongRegistry>: CollectionController<S
 		selectionObserver = context.$selectedSongs.sink { [unowned self] selection in
 			for songID in selection {
 				let song = context.registry[songID]!
-				let path = collection.data.indexPath(for: song)
-				collection.view.selectItem(at: path, animated: false, scrollPosition: .top)
+				if let path = collection.data.indexPath(for: song) {
+					collection.view.selectItem(at: path, animated: false, scrollPosition: .top)
+				}
 			}
 		}
 
@@ -59,7 +64,7 @@ class SongsController<Registry: PresentableSongRegistry>: CollectionController<S
 
 	}
 
-	// MARK: Search bar
+	// MARK: - Search bar
 
 	func setupSearchBar() {
 		searchController.obscuresBackgroundDuringPresentation = false
@@ -70,26 +75,8 @@ class SongsController<Registry: PresentableSongRegistry>: CollectionController<S
 		navigationItem.searchController = searchController
 	}
 
-	func updateSearchResults(for searchController: UISearchController) {
-		if let searchTerm = searchController.searchBar.text {
-			context.searchTerm = searchTerm
-		}
-	}
-
-	func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-		print("scope", selectedScope)
-	}
-
-	func updateSearchScopeOptions(selection: Set<Registry.Theme.ID>) {
-		let themeNames: [String] = selection.compactMap { id in
-			guard let theme = context.registry[id] else { return nil }
-			return theme.subtitle ?? theme.title
-		}
-		let allSongs = NSLocalizedString("All songs", comment: "Search scope to searhc in all the songs")
-		searchController.searchBar.scopeButtonTitles = themeNames.isEmpty ? nil : [allSongs] + themeNames
-	}
-
 	func willPresentSearchController(_ searchController: UISearchController) {
+		context.isSearching = true
 		let configuration = UICollectionLayoutListConfiguration(appearance: .plain)
 		// TODO: Add animation
 		collection.view.setCollectionViewLayout(UICollectionViewCompositionalLayout.list(using: configuration), animated: false)
@@ -97,10 +84,51 @@ class SongsController<Registry: PresentableSongRegistry>: CollectionController<S
 	}
 
 	func willDismissSearchController(_ searchController: UISearchController) {
+		context.isSearching = false
 		// TODO: Add animation
 		collection.view.setCollectionViewLayout(Self.createLayout(), animated: false)
 		backgroundColorFix()
 	}
+
+	func updateSearchResults(for searchController: UISearchController) {
+		if let searchTerm = searchController.searchBar.text {
+			context.searchTerm = searchTerm
+		}
+	}
+
+	// MARK: Search bar scopes
+
+	func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+		let selection: SearchScope<Registry.Theme.ID>
+		if selectedScope == 0 {
+			selection = .all
+		} else {
+			let index = selectedScope - 1
+			if searchScopes.indices.contains(index) {
+				selection = .theme(searchScopes[index])
+			} else {
+				selection = .all
+			}
+		}
+		context.searchScope = selection
+	}
+
+	func updateSearchScopeOptions(selection: Set<Registry.Theme.ID>) {
+		let themes: [(Registry.Theme.ID, String)] = selection.enumerated().compactMap { index, id  in
+			guard let theme = context.registry[id] else { return nil }
+			return (theme.id, theme.subtitle ?? theme.title)
+		}
+		searchScopes = themes.map(\.0)
+		if themes.isEmpty {
+			context.searchScope = .all
+			searchController.searchBar.scopeButtonTitles = nil
+		} else {
+			let allSongs = NSLocalizedString("All songs", comment: "Search scope to searhc in all the songs")
+			searchController.searchBar.scopeButtonTitles = [allSongs] + themes.map(\.1)
+		}
+	}
+
+	// MARK: -
 
 	// TODO: remove this bugfix
 	func backgroundColorFix() {
@@ -113,8 +141,6 @@ class SongsController<Registry: PresentableSongRegistry>: CollectionController<S
 				for path in selection.compactMap({collection.data.indexPath(for: $0)}) {
 					collection.view.selectItem(at: path, animated: false, scrollPosition: [])
 				}
-			} else {
-				print("selection was empty", context.selectedSongs, selection)
 			}
 		}
 	}

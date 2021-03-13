@@ -19,7 +19,9 @@ class BrowserState<Registry: SongRegistry>: ObservableObject {
 	@Published var selectedThemes: Set<Registry.Theme.ID> { willSet {updateDependencies(for: newValue)} }
 	@Published var selectedSongs = Set<Registry.Song.ID>()
 
-	@Published var searchTerm = ""
+	@Published var searchTerm = "" { willSet {filterSongs(by: newValue)} }
+	@Published var isSearching = false { willSet {update(searchState: newValue)} }
+	@Published var searchScope = SearchScope<Registry.Theme.ID>.all { willSet {filterSongs(by: searchTerm)} }
 
 	let songState: SongState<Registry>
 
@@ -32,8 +34,9 @@ class BrowserState<Registry: SongRegistry>: ObservableObject {
 		themes = groupedThemes
 
 		if let theme = groupedThemes.first?.first {
-			selectedThemes = [theme.id]
-			self.songs = songs.songs(in: theme.id)
+			let selection: Set = [theme.id]
+			selectedThemes = selection
+			self.songs = songs.songs(in: selection)
 		} else {
 			self.songs = []
 			selectedThemes = []
@@ -51,11 +54,25 @@ class BrowserState<Registry: SongRegistry>: ObservableObject {
 	}
 
 	private func updateDependencies(for selectedThemes: Set<Registry.Theme.ID>) {
-		var newSongs = [Registry.Song]()
-		for theme in selectedThemes {
-			newSongs.append(contentsOf: registry.songs(in: theme))
+		if isSearching {
+			filterSongs(by: searchTerm)
+		} else {
+			songs = registry.songs(in: selectedThemes)
 		}
-		songs = newSongs
+	}
+
+	func filterSongs(by searchTerm: String) {
+		if searchTerm.count > 2 {
+			songs = registry.searchSong(searchTerm, in: searchScope).compactMap{ registry[$0] }
+		} else {
+			songs = (searchScope == .all) ? registry.songs : registry.songs(in: selectedThemes)
+		}
+	}
+
+	func update(searchState: Bool) {
+		if searchState == false {
+			updateDependencies(for: selectedThemes)
+		}
 	}
 
 	func selectedThemesAreContained(in groups: [[Registry.Theme]]) -> Bool {

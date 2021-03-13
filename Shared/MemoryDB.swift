@@ -8,6 +8,8 @@
 import Tagged
 
 class MemoryDataBase: SongRegistry {
+	typealias LocalScope = SearchScope<Theme.ID>
+
 	enum Language: String, CaseIterable {
 		case dutch = "nl", english = "en", french = "fr"
 	}
@@ -47,8 +49,12 @@ class MemoryDataBase: SongRegistry {
 		index = Index(songs: songs, themes: themes, theme🔗songs: theme🔗songs)
 	}
 
-	func searchSong(_ text: String) -> [Song.ID] {
-		return songs.lazy.filter { $0.title.contains(text) }.map(\.id)
+	func searchSong(_ text: String, in scope: LocalScope) -> [Song.ID] {
+		let allSongs = songs.lazy.filter { $0.title.contains(text) }
+		switch scope {
+		case .all: return allSongs.map(\.id)
+		case .theme(let theme): return allSongs.filter{ self.index.themesBySong[$0.id.rawValue] == theme }.map(\.id)
+		}
 	}
 
 	func groupedThemes(in language: Language) -> [[Theme]] {
@@ -66,8 +72,12 @@ class MemoryDataBase: SongRegistry {
 		themes[index.themesBySong[id.rawValue]]!
 	}
 
-	func songs(in theme: Theme.ID) -> [Song] {
-		index.songsByTheme[theme.rawValue].map{songs[$0.rawValue]}
+	func songs<Themes: Collection>(in themes: Themes) -> [Song] where Themes.Element == Theme.ID {
+		var result = Set<Song.ID>()
+		for theme in themes {
+			result = result.union(index.songsByTheme[theme.rawValue])
+		}
+		return result.map{songs[$0.rawValue]}
 	}
 
 	func translations(for song: Song.ID) -> [Song.ID] {

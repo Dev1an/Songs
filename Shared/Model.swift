@@ -22,17 +22,23 @@ protocol ReferableTheme: Hashable {
 	var language: Language {get}
 }
 
+enum SearchScope<ThemeID: Equatable>: Equatable {
+	case all
+	case theme(ThemeID)
+}
+
 protocol SongRegistry {
 	associatedtype Language
 	associatedtype Song: ReferableSong where Song.Language == Language
 	associatedtype Theme: ReferableTheme where Theme.Language == Language
 
 	var languages: [Language] {get}
+	var songs: [Song] {get}
 
-	func searchSong(_ text: String) -> [Song.ID]
+	func searchSong(_ text: String, in scope: SearchScope<Theme.ID>) -> [Song.ID]
 
 	func groupedThemes(in language: Language) -> [[Theme]]
-	func songs(in theme: Theme.ID) -> [Song]
+	func songs<Themes: Collection>(in themes: Themes) -> [Song] where Themes.Element == Theme.ID
 	func translations(for song: Song.ID) -> [Song.ID]
 
 	func themeOf(song id: Song.ID) -> Theme
@@ -43,6 +49,10 @@ protocol SongRegistry {
 	subscript(theme: Theme.ID) -> Theme? {get}
 }
 
+extension SongRegistry {
+	static var allSongsScope: SearchScope<Theme.ID> { .all }
+	static func themeScope(_ id: Theme.ID) -> SearchScope<Theme.ID> { .theme(id) }
+}
 
 // MARK: - Default implementations -
 
