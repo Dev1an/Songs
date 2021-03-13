@@ -12,29 +12,11 @@ class BrowserState<Registry: SongRegistry>: ObservableObject {
 	let registry: Registry
 
 	@Published private (set) var languages: [Registry.Language]
-	@Published private (set) var themes: [[Registry.Theme]]
+	@Published private (set) var themes: [[Registry.Theme]] { willSet {updateDependencies(for: newValue)} }
 	@Published private (set) var songs: [Registry.Song]
 
-	@Published var selectedLanguage: Registry.Language {
-		willSet {
-			// TODO: Make atomic changes
-			themes = registry.groupedThemes(in: newValue)
-			if let theme = themes.first?.first {
-				selectedThemes = [theme.id]
-			} else {
-				selectedThemes = []
-			}
-		}
-	}
-	@Published var selectedThemes: Set<Registry.Theme.ID> {
-		willSet {
-			var newSongs = [Registry.Song]()
-			for theme in newValue {
-				newSongs.append(contentsOf: registry.songs(in: theme))
-			}
-			songs = newSongs
-		}
-	}
+	@Published var selectedLanguage: Registry.Language { willSet {updateDependencies(for: newValue)} }
+	@Published var selectedThemes: Set<Registry.Theme.ID> { willSet {updateDependencies(for: newValue)} }
 	@Published var selectedSongs = Set<Registry.Song.ID>()
 
 	@Published var searchTerm = ""
@@ -58,5 +40,33 @@ class BrowserState<Registry: SongRegistry>: ObservableObject {
 		}
 	}
 
-	
+	private func updateDependencies(for selectedLanguage: Registry.Language) {
+		themes = registry.groupedThemes(in: selectedLanguage)
+	}
+
+	private func updateDependencies(for visibleThemes: [[Registry.Theme]]) {
+		if !selectedThemesAreContained(in: visibleThemes) {
+			selectedThemes = []
+		}
+	}
+
+	private func updateDependencies(for selectedThemes: Set<Registry.Theme.ID>) {
+		var newSongs = [Registry.Song]()
+		for theme in selectedThemes {
+			newSongs.append(contentsOf: registry.songs(in: theme))
+		}
+		songs = newSongs
+	}
+
+	func selectedThemesAreContained(in groups: [[Registry.Theme]]) -> Bool {
+		var themesToCheck = selectedThemes
+		for group in groups {
+			for theme in group {
+				themesToCheck.remove(theme.id)
+			}
+			// Early exit
+			if themesToCheck.isEmpty { return true}
+		}
+		return themesToCheck.isEmpty
+	}
 }

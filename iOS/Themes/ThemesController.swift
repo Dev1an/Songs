@@ -20,7 +20,7 @@ class ThemeController<Registry: PresentableSongRegistry>: CollectionController<T
 		navigationItem.title = "Themes"
 
 		languageObserver = context.$selectedLanguage.combineLatest(context.$languages).sink{ [unowned self] (selection, languages) in
-			navigationItem.leftBarButtonItem = UIBarButtonItem(
+			navigationItem.rightBarButtonItem = UIBarButtonItem(
 				title: "Languages",
 				menu: UIMenu(
 					children: languages.map { [weak controller = self] language in
@@ -33,7 +33,7 @@ class ThemeController<Registry: PresentableSongRegistry>: CollectionController<T
 		}
 
 		themesObserver = context.$themes.sink { [unowned self] themes in
-			Self.update(dataSource: collection.data, with: themes)
+			Self.update(dataSource: collection.data, with: themes, animatingDifferences: true)
 		}
 
 		selectionObserver = context.$selectedThemes.sink { [unowned self] selection in
